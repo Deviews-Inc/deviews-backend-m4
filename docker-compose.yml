@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   api:
-    container_name: api
+    container_name: deviewsapi
     build: .
     ports:
       - 3000:3000
@@ -15,7 +15,7 @@ services:
       - .:/app
 
   db:
-    container_name: db
+    container_name: deviewsdb
     image: postgres:14-alpine
     ports:
       - 5431:5432
@@ -27,5 +27,3 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
-   
-
