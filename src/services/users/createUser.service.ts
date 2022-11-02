@@ -2,18 +2,19 @@ import AppDataSource from "../../data-source";
 import AppError from "../../errors/appError";
 import { IUserRequest } from "../../interfaces/users.interfaces";
 import { hash } from "bcryptjs";
+import User from "../../entities/user.entity";
 
 const createUserService = async ({
   name,
-  user_name,
+  username,
   email,
   password,
   bio,
-  profile_picture,
-}: IUserRequest) => {
-  const userRepository = AppDataSource.getRepository();
+  profilePicture,
+}: IUserRequest): Promise<User> => {
+  const userRepository = AppDataSource.getRepository(User);
 
-  const userAlreadyExists = userRepository.findOneBy({ email });
+  const userAlreadyExists = await userRepository.findOneBy({ email });
 
   if (userAlreadyExists) {
     throw new AppError("User already exists");
@@ -21,11 +22,11 @@ const createUserService = async ({
 
   const user = userRepository.create({
     name,
-    user_name,
+    username,
     email,
     password: await hash(password, 10),
     bio,
-    profile_picture,
+    profilePicture,
   });
 
   await userRepository.save(user);

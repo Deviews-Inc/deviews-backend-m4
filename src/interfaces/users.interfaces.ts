@@ -1,9 +1,9 @@
 export interface IUserRequest {
   name: string;
-  user_name: string;
+  username: string;
   email: string;
   password: string;
   bio: string;
-  profile_picture: string;
+  profilePicture: string;
   users_techs_id: string;
 }
