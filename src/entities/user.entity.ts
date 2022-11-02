@@ -28,3 +28,5 @@ class User {
   @Column({ default: true })
   isActive: boolean;
 }
+
+export default User;

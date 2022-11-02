@@ -8,3 +8,5 @@ class Posts {
   @Column({ length: 140 })
   content: string;
 }
+
+export default Posts;
