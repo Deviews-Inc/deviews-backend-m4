@@ -1,8 +1,7 @@
-import AppDataSource from "../data-source";
-import Users from "../entities/Users";
-
+import AppDataSource from "../../data-source";
+import User from "../../entities/user.entity";
 const listUsersService = async () => {
-  const usersRepository = AppDataSource.getRepository(Users);
+  const usersRepository = AppDataSource.getRepository(User);
   const users = await usersRepository.find();
   return users;
 }
