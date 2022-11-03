@@ -17,5 +17,5 @@ export const createPostController = async (req: Request, res: Response) => {
 
   const createPost = await createPostService(userId, data);
 
-  return res.status(201).send();
+  return res.status(201).json(createPost);
 };
