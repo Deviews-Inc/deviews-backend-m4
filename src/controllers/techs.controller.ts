@@ -7,7 +7,7 @@ export const createTechController = async (req: Request, res: Response) => {
   const tech = req.body;
   const createdTech = await createTechService(tech);
 
-  return res.status(204).json(createdTech);
+  return res.status(201).json(createdTech);
 };
 
 export const deleteTechController = async (req: Request, res: Response) => {
