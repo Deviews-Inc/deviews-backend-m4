@@ -22,6 +22,6 @@ export const updateTechsController = async (req: Request, res: Response) => {
   const tech: ITechUpdate = req.body;
   const updatedTech = await updateTechsService(tech);
   if (updatedTech instanceof Techs) {
-    return res.status(201).json(updatedTech);
+    return res.status(200).json(updatedTech);
   }
 };
