@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
+  CreateDateColumn,
 } from "typeorm";
 import Comments from "./comments.entity";
 import FirePosts from "./firePosts.entity";
@@ -16,6 +17,9 @@ class Posts {
 
   @Column({ length: 140 })
   content: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.posts)
   user: User;
