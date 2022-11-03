@@ -1,6 +1,14 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import allTechsService from "../services/techs/allTechs.service";
+import createTechService from "../services/techs/createTech.service";
 import deleteTechService from "../services/techs/deleteTech.service";
+
+export const createTechController = async (req: Request, res: Response) => {
+  const tech = req.body;
+  const createdTech = await createTechService(tech);
+
+  return res.status(204).json(createdTech);
+};
 
 export const deleteTechController = async (req: Request, res: Response) => {
   const { id } = req.params;
