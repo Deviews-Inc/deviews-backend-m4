@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { deleteTechController } from "../controllers/techs.controller";
 import {
   createUserController,
   deleteUserController,
@@ -31,5 +32,7 @@ usersRoutes.patch(
   updateUserController
 );
 usersRoutes.delete("/:id", deleteUserController);
+
+usersRoutes.delete("/techs/:id", deleteTechController);
 
 export default usersRoutes;
