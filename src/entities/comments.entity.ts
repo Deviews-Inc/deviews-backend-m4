@@ -1,19 +1,29 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
-import { v4 as uuidv4 } from "uuid";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import FireComments from "./fireComments.entity";
+import Posts from "./posts.entity";
+import User from "./user.entity";
 
 @Entity("comments")
 class Comments {
-  @PrimaryColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
   @Column()
   content: string;
 
-  constructor() {
-    if (!this.id) {
-      this.id = uuidv4();
-    }
-  }
-}
+  @ManyToOne(() => User, (user) => user.comments)
+  user: User;
 
+  @OneToMany(() => FireComments, (fires) => fires.user)
+  fires: FireComments[];
+
+  @ManyToOne(() => Posts, (posts) => posts.comments)
+  post: Posts;
+}
 export default Comments;
