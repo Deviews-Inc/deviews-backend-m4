@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { firesPostController } from "../controllers/fires.controllers";
+import {
+  firesCommentController,
+  firesPostController,
+} from "../controllers/fires.controllers";
 import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
 
 const firesRoutes = Router();
 
-firesRoutes.post("/posts/:id", isLoggedInMiddleware, firesPostController);
+firesRoutes.post("/posts/:idPost", isLoggedInMiddleware, firesPostController);
+firesRoutes.post(
+  "/comments/:idComment",
+  isLoggedInMiddleware,
+  firesCommentController
+);
 
 export default firesRoutes;

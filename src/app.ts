@@ -6,13 +6,15 @@ import handleErrorMiddleware from "./middlewares/handleError.middleware";
 import sessionRoutes from "./routes/session.routes";
 import postRoutes from "./routes/post.routes";
 import firesRoutes from "./routes/fire.routes";
+import techsRoutes from "./routes/techs.routes";
 
 const app = express();
 app.use(express.json());
 app.use("/users", userRoutes);
 app.use("/login", sessionRoutes);
 app.use("/post", postRoutes);
-app.use("fires", firesRoutes);
+app.use("/fires", firesRoutes);
+app.use("/techs", techsRoutes);
 app.use(handleErrorMiddleware);
 
 export default app;
