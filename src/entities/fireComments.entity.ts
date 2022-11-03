@@ -5,13 +5,13 @@ import User from "./user.entity";
 @Entity("fires_comments")
 class FireComments {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  readonly id: string;
 
   @ManyToOne(() => User, (user) => user.fireComments)
   user: User;
 
-  @ManyToOne(() => Comments, (comments) => comments.fireComments)
-  comments: Comments[];
+  @ManyToOne(() => Comments, (comments) => comments.fires)
+  comments: Comments;
 }
 
 export default FireComments;

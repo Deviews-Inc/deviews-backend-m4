@@ -16,7 +16,7 @@ import FireComments from "./fireComments.entity";
 @Entity("users")
 class User {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  readonly id: string;
 
   @Column({ length: 60 })
   name: string;
