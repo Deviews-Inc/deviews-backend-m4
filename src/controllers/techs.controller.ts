@@ -7,6 +7,7 @@ export const deleteTechController = async (req: Request, res: Response) => {
   const deletedTech = await deleteTechService(id);
 
   return res.status(204).json(deletedTech);
+};
 
 export const allTechsController = async (req: Request, res: Response) => {
   const techs = await allTechsService();
