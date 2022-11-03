@@ -20,6 +20,7 @@ export const allTechsController = async (req: Request, res: Response) => {
 
 export const updateTechsController = async (req: Request, res: Response) => {
   const tech: ITechUpdate = req.body;
+  tech.id = req.params.id;
   const updatedTech = await updateTechsService(tech);
   if (updatedTech instanceof Techs) {
     return res.status(200).json(updatedTech);

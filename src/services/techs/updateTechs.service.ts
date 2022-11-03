@@ -6,9 +6,6 @@ const updateTechsService = async ({
   tech_name,
   id,
 }: Techs): Promise<ITechUpdate> => {
-  if (!id) {
-    throw new AppError("id required");
-  }
   const userRepository = AppDataSource.getRepository(Techs);
   const findUser = await userRepository.findOneBy({
     id,
