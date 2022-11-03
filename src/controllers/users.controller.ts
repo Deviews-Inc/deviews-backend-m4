@@ -29,7 +29,7 @@ export const updateUserController = async (req: Request, res: Response) => {
   user.userId = req.params.id;
   const updatedUser = await updateUserService(user);
   if (updatedUser instanceof User) {
-    return res.status(201).json(updatedUser);
+    return res.json(updatedUser);
   }
 };
 
