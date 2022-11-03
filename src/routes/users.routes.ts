@@ -1,12 +1,34 @@
 import { Router } from "express";
 import {
-  createUserController, updateUserController,
-  
+  createUserController,
+  listUsersController,
+  readUserController,
+  updateUserController,
 } from "../controllers/users.controller";
+import isActiveMiddleware from "../middlewares/isActive.middleware";
+import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
 
-const userRoutes = Router();
+const usersRoutes = Router();
 
-userRoutes.post("", createUserController);
-userRoutes.patch("/:id", updateUserController);
+usersRoutes.post("", createUserController);
+usersRoutes.get(
+  "",
+  isLoggedInMiddleware,
+  isActiveMiddleware,
+  listUsersController
+);
+usersRoutes.get(
+  "/:id",
+  isLoggedInMiddleware,
+  isActiveMiddleware,
+  readUserController
+);
+usersRoutes.patch(
+  "/:id",
+  isLoggedInMiddleware,
+  isActiveMiddleware,
+  updateUserController
+);
+usersRoutes.delete("/:id");
 
-export default userRoutes;
+export default usersRoutes;
