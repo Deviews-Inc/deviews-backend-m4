@@ -15,7 +15,7 @@ const updateUserService = async ({
   userId,
 }: IUserUpdate): Promise<User> => {
   if (id || isActive) {
-    throw new AppError("id and isActive fields cannot be updated", 400);
+    throw new AppError("id and isActive fields cannot be updated");
   }
   const userRepository = AppDataSource.getRepository(User);
   const findUser = await userRepository.findOneBy({
