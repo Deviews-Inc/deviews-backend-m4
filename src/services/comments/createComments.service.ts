@@ -26,6 +26,15 @@ const createCommentsService = async ({
     throw new AppError("Post does not exist");
   }
 
+  const postExits = await commentsRepository.findOneBy({
+    content: content,
+    user: searchUser!,
+  });
+
+  if (postExits) {
+    throw new AppError("existing post");
+  }
+
   const newComment = commentsRepository.create({
     content: content,
     post: searchPost,
