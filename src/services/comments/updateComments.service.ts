@@ -18,13 +18,16 @@ const updateCommentsService = async (
 
   const user = await userRepository.findOneBy({ id: userId });
 
-  const comment = await commentRepository.findOneBy({ id });
+  const comment = await commentRepository.findOne({
+    where: { id },
+    relations: { user: true },
+  });
 
   if (!comment) {
     throw new AppError("Comment not found", 404);
   }
 
-  if (comment.user !== user) {
+  if (comment.user.id !== userId) {
     throw new AppError("Not allowed to update", 403);
   }
 
@@ -40,7 +43,14 @@ const updateCommentsService = async (
     content,
   });
 
-  const updatedComment = await commentRepository.findOneBy({ id });
+  const updatedComment = await commentRepository.findOne({
+    where: {
+      id,
+    },
+    relations: {
+      user: true,
+    },
+  });
 
   return updatedComment!;
 };
