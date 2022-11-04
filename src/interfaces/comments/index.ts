@@ -6,6 +6,12 @@ export interface IComment {
   content: string;
 }
 
+export interface ICommentsRequest {
+  content: string;
+  user: string;
+  post: string;
+  }
+
 export interface ICommentUpdate extends IComment {
   id: string;
   createdAt: Date;

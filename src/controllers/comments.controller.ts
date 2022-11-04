@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { ICommentUpdate } from "../interfaces/comments";
+import { ICommentsRequest, ICommentUpdate } from "../interfaces/comments";
+import createCommentsService from "../services/comments/createComments.service";
 import updateCommentsService from "../services/comments/updateComments.service";
 
 export const updateCommentsController = async (req: Request, res: Response) => {
@@ -11,4 +12,11 @@ export const updateCommentsController = async (req: Request, res: Response) => {
   const updateComment = updateCommentsService(id, userId, data);
 
   return res.status(200).json(updateComment);
+};
+
+export const createCommentsController = async (req: Request, res: Response) => {
+  const data: ICommentsRequest = req.body;
+  data.user = req.user.id;
+  const createComment = await createCommentsService(data);
+  return res.status(201).json(createComment);
 };
