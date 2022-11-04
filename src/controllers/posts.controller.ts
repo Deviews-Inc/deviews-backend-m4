@@ -1,3 +1,4 @@
+import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import { IPostRequest } from "../interfaces/posts";
 import createPostService from "../services/posts/createPost.service";
@@ -20,22 +21,22 @@ export const createPostController = async (req: Request, res: Response) => {
 
   const createPost = await createPostService(userId, data);
 
-  return res.status(201).json(createPost);
+  return res.status(201).json(instanceToPlain(createPost));
 };
 
 export const listPostsController = async (req: Request, res: Response) => {
   const posts = await listPostsService();
-  return res.json(posts);
-}
+  return res.json(instanceToPlain(posts));
+};
 
 export const listPostsUserController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const posts = await listPostsUserService(id);
-  return res.json(posts);
-}
+  return res.json(instanceToPlain(posts));
+};
 
 export const retrievePostController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const post = await retrievePostService(id);
-  return res.json(post);
-}
+  return res.json(instanceToPlain(post));
+};

@@ -4,24 +4,7 @@ const listUsersService = async () => {
   const usersRepository = AppDataSource.getRepository(User);
   const users = await usersRepository.find();
 
-  const returnUsers = users.map(user => {
-    const returnUser = {
-      bio: user!.bio,
-      comments: user!.comments,
-      email: user!.email,
-      fireComments: user!.fireComments,
-      firePosts: user!.firePosts,
-      id: user!.id,
-      isActive: user!.isActive,
-      name: user!.name,
-      posts: user!.posts,
-      profilePicture: user!.profilePicture,
-      techs: user!.techs,
-      username: user!.username,
-    }
-    return returnUser
-  })
-  return returnUsers;
+  return users;
 }
 
 export default listUsersService;
