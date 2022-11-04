@@ -21,7 +21,9 @@ class Posts {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.posts, {
+    eager: true
+  })
   user: User;
 
   @OneToMany(() => FirePosts, (fire) => fire.post)

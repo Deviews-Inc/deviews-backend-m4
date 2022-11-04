@@ -26,6 +26,7 @@ const createPostService = async (
 
   const newPost = postRepository.create({
     content,
+    user: user!,
   });
 
   await postRepository.save(newPost);

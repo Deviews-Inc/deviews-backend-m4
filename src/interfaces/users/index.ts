@@ -6,13 +6,18 @@ export interface IUserResponse extends IUserRequest {
 }
 
 export interface IUser {
-  id: string;
-  name: string;
+  bio: string;
+  //comments: Comments[];
   email: string;
-  isAdm: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  //fireComments: FireComments[];
+  //firePosts: FirePosts[];
+  id: string;
   isActive: boolean;
+  name: string;
+  //posts: Posts[];
+  profilePicture: string;
+  //techs: Techs[];
+  username: string;
 }
 
 export interface IUserDecoded {
