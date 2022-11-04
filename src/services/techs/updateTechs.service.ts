@@ -2,10 +2,12 @@ import AppDataSource from "../../data-source";
 import Techs from "../../entities/techs.entity";
 import AppError from "../../errors/appError";
 import { ITechUpdate } from "../../interfaces/techs";
+
+
 const updateTechsService = async ({
   tech_name,
   id,
-}: Techs): Promise<ITechUpdate> => {
+}: ITechUpdate): Promise<Techs> => {
   const userRepository = AppDataSource.getRepository(Techs);
   const findUser = await userRepository.findOneBy({
     id,

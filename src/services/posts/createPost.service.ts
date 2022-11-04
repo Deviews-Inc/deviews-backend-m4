@@ -6,7 +6,7 @@ import { IPostRequest } from "../../interfaces/posts";
 
 const createPostService = async (
   userId: string,
-  { content }: IPostRequest
+  { content, image }: IPostRequest
 ): Promise<Posts> => {
   const postRepository = AppDataSource.getRepository(Posts);
   const userRepository = AppDataSource.getRepository(User);
@@ -15,23 +15,30 @@ const createPostService = async (
     id: userId,
   });
 
-  const postAlreadyExists = await postRepository.findOneBy({
-    user: user!,
-    content,
-  });
-
-  if (postAlreadyExists) {
-    throw new AppError("Post already exists in this account");
+  if (!user){
+    throw new AppError("User does not exists", 404);
   }
 
   const newPost = postRepository.create({
     content,
-    user: user!,
+    image,
+    user: user!
   });
 
   await postRepository.save(newPost);
 
-  return newPost;
+  const post = await postRepository.findOne({
+    where: {
+      id: newPost.id
+    }, 
+    relations:{
+      user: true,
+      fire_posts: true,
+      comments: true
+    }
+  })
+
+  return post!;
 };
 
 export default createPostService;

@@ -5,6 +5,6 @@ const listUsersService = async (): Promise<User[]> => {
   const users = await usersRepository.find();
   
   return users;
-}
+};
 
 export default listUsersService;

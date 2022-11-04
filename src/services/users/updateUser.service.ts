@@ -9,7 +9,7 @@ const updateUserService = async ({
   email,
   password,
   bio,
-  profilePicture,
+  profile_picture,
   id,
   isActive,
   userId,
@@ -32,7 +32,7 @@ const updateUserService = async ({
     email,
     password: password ? await hash(password, 10) : findUser.password,
     bio,
-    profilePicture,
+    profile_picture,
   });
 
   const user = await userRepository.findOneBy({

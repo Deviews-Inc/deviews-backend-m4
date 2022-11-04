@@ -7,7 +7,7 @@ class FireComments {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @ManyToOne(() => User, (user) => user.fireComments)
+  @ManyToOne(() => User, (user) => user.fire_comments)
   user: User;
 
   @ManyToOne(() => Comments, (comments) => comments.fires)

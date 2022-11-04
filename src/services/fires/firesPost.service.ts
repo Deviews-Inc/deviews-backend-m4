@@ -4,7 +4,10 @@ import Posts from "../../entities/posts.entity";
 import User from "../../entities/user.entity";
 import AppError from "../../errors/appError";
 
-const firesPostService = async (idPost: string, idUser: string) => {
+const firesPostService = async (
+  idPost: string,
+  idUser: string
+): Promise<string> => {
   const firesPostRepository = AppDataSource.getRepository(FirePosts);
   const postsRepository = AppDataSource.getRepository(Posts);
   const usersRepository = AppDataSource.getRepository(User);

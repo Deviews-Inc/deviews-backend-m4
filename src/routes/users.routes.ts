@@ -4,7 +4,7 @@ import {
   createUserController,
   deleteUserController,
   listUsersController,
-  readUserController,
+  retrieveUserController,
   updateUserController,
 } from "../controllers/users.controllers";
 import isActiveMiddleware from "../middlewares/isActive.middleware";
@@ -19,20 +19,13 @@ usersRoutes.get(
 
   listUsersController
 );
-usersRoutes.get(
-  "/:id",
-  isLoggedInMiddleware,
-
-  readUserController
-);
+usersRoutes.get("/:id", isLoggedInMiddleware, retrieveUserController);
 usersRoutes.patch(
   "/:id",
   isLoggedInMiddleware,
   isActiveMiddleware,
   updateUserController
 );
-usersRoutes.delete("/:id", deleteUserController);
-
-usersRoutes.delete("/techs/:id", deleteTechController);
+usersRoutes.delete("/:id", isLoggedInMiddleware, deleteUserController);
 
 export default usersRoutes;
