@@ -6,7 +6,7 @@ import {
   listPostsUserController,
   retrievePostController,
   updatePostController,
-} from "../controllers/posts.controller";
+} from "../controllers/posts.controllers";
 import isActiveMiddleware from "../middlewares/isActive.middleware";
 import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
 

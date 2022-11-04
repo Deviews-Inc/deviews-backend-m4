@@ -9,11 +9,11 @@ const updateUserService = async ({
   email,
   password,
   bio,
-  profilePicture,
+  profile_picture,
   id,
   isActive,
   userId,
-}: IUserUpdate) => {
+}: IUserUpdate): Promise<User> => {
   if (id || isActive) {
     throw new AppError("id and isActive fields cannot be updated");
   }
@@ -32,28 +32,14 @@ const updateUserService = async ({
     email,
     password: password ? await hash(password, 10) : findUser.password,
     bio,
-    profilePicture,
+    profile_picture,
   });
 
   const user = await userRepository.findOneBy({
     id: userId,
   });
 
-  const returnUser = {
-    bio: user!.bio,
-    comments: user!.comments,
-    email: user!.email,
-    fireComments: user!.fireComments,
-    firePosts: user!.firePosts,
-    id: user!.id,
-    isActive: user!.isActive,
-    name: user!.name,
-    posts: user!.posts,
-    profilePicture: user!.profilePicture,
-    techs: user!.techs,
-    username: user!.username,
-  }
-  return returnUser! ;
+  return user!;
 };
 
 export default updateUserService;

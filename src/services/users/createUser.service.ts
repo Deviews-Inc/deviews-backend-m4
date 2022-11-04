@@ -10,8 +10,8 @@ const createUserService = async ({
   email,
   password,
   bio,
-  profilePicture,
-}: IUserRequest) => {
+  profile_picture,
+}: IUserRequest): Promise<User> => {
   const userRepository = AppDataSource.getRepository(User);
 
   const userAlreadyExists = await userRepository.findOneBy({ email });
@@ -26,7 +26,7 @@ const createUserService = async ({
     email,
     password: await hash(password, 10),
     bio,
-    profilePicture,
+    profile_picture,
   });
 
   await userRepository.save(user);
