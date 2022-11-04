@@ -5,6 +5,7 @@ import {
   listPostsController,
   listPostsUserController,
   retrievePostController,
+  updatePostController,
 } from "../controllers/posts.controller";
 import isActiveMiddleware from "../middlewares/isActive.middleware";
 import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
@@ -16,5 +17,6 @@ postRoutes.delete("/:id", isLoggedInMiddleware, deletePostController);
 postRoutes.get("", isLoggedInMiddleware, listPostsController);
 postRoutes.get("/:id", isLoggedInMiddleware, retrievePostController);
 postRoutes.get("/user/:id", isLoggedInMiddleware, listPostsUserController);
+postRoutes.patch("/:id", updatePostController);
 
 export default postRoutes;

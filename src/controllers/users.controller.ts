@@ -1,5 +1,5 @@
 import { instanceToPlain } from "class-transformer";
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import User from "../entities/user.entity";
 import { IUserRequest, IUserUpdate } from "../interfaces/users";
 import createUserService from "../services/users/createUser.service";
@@ -30,7 +30,7 @@ export const updateUserController = async (req: Request, res: Response) => {
   user.userId = req.params.id;
   const updatedUser = await updateUserService(user);
   if (updatedUser instanceof User) {
-    return res.status(201).json(instanceToPlain(updatedUser));
+    return res.json(instanceToPlain(updatedUser));
   }
 };
 
