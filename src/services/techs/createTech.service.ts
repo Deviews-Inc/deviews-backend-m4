@@ -1,9 +1,11 @@
 import AppDataSource from "../../data-source";
 import Techs from "../../entities/techs.entity";
 import AppError from "../../errors/appError";
-import { ITech } from "../../interfaces/techs";
+import { ITechUpdate } from "../../interfaces/techs";
 
-const createTechService = async ({ tech_name }: ITech): Promise<Techs> => {
+const createTechService = async ({
+  tech_name,
+}: ITechUpdate): Promise<Techs> => {
   const techRepository = AppDataSource.getRepository(Techs);
 
   const techAlreadyExists = await techRepository.findOneBy({

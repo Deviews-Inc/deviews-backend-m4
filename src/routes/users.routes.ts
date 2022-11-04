@@ -16,13 +16,13 @@ usersRoutes.post("", createUserController);
 usersRoutes.get(
   "",
   isLoggedInMiddleware,
-  isActiveMiddleware,
+  
   listUsersController
 );
 usersRoutes.get(
   "/:id",
   isLoggedInMiddleware,
-  isActiveMiddleware,
+  
   readUserController
 );
 usersRoutes.patch(

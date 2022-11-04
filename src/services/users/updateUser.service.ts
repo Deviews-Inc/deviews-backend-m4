@@ -13,7 +13,7 @@ const updateUserService = async ({
   id,
   isActive,
   userId,
-}: IUserUpdate): Promise<User> => {
+}: IUserUpdate) => {
   if (id || isActive) {
     throw new AppError("id and isActive fields cannot be updated");
   }
@@ -39,7 +39,21 @@ const updateUserService = async ({
     id: userId,
   });
 
-  return user!;
+  const returnUser = {
+    bio: user!.bio,
+    comments: user!.comments,
+    email: user!.email,
+    fireComments: user!.fireComments,
+    firePosts: user!.firePosts,
+    id: user!.id,
+    isActive: user!.isActive,
+    name: user!.name,
+    posts: user!.posts,
+    profilePicture: user!.profilePicture,
+    techs: user!.techs,
+    username: user!.username,
+  }
+  return returnUser! ;
 };
 
 export default updateUserService;
