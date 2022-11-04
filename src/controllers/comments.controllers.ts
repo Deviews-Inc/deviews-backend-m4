@@ -6,6 +6,7 @@ import updateCommentsService from "../services/comments/updateComments.service";
 export const createCommentsController = async (req: Request, res: Response) => {
   const data = req.body;
   data.user = req.user.id;
+  data.post = req.params.id;
 
   const createComment = await createCommentsService(data);
   return res.status(201).json(createComment);
