@@ -43,14 +43,7 @@ const updateCommentsService = async (
     content,
   });
 
-  const updatedComment = await commentRepository.findOne({
-    where: {
-      id,
-    },
-    relations: {
-      user: true,
-    },
-  });
+  const updatedComment = await commentRepository.findOneBy({ id });
 
   return updatedComment!;
 };
