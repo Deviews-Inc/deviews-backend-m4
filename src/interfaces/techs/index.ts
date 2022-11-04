@@ -1,4 +1,5 @@
-export interface ITech {
-  tech_name: string;
-  id: string;
+export interface ITechUpdate{
+    id: string
+    tech_name : string
 }
+

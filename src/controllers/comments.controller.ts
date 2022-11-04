@@ -1,4 +1,3 @@
-//codar aqui
 import { Request, Response } from "express";
 import { ICommentUpdate } from "../interfaces/comments";
 import updateCommentsService from "../services/comments/updateComments.service";
