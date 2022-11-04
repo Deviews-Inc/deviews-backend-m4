@@ -26,7 +26,7 @@ const createSessionService = async ({
       id: userExists.id,
       isActive: userExists.isActive,
     },
-    "ohana" as string,
+    process.env.SECRET_KEY as string,
     {
       expiresIn: "24h",
       subject: userExists.id,
