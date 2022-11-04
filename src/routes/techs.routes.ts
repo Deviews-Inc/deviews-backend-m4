@@ -3,7 +3,7 @@ import {
   allTechsController,
   updateTechsController,
   createTechController,
-} from "../controllers/techs.controller";
+} from "../controllers/techs.controllers";
 
 const techsRoutes = Router();
 

@@ -1,8 +1,9 @@
 import AppDataSource from "../../data-source";
+import Posts from "../../entities/posts.entity";
 import User from "../../entities/user.entity";
 import AppError from "../../errors/appError";
 
-const listPostsUserService = async (id: string) => {
+const listPostsUserService = async (id: string): Promise<Posts[]> => {
   const usersRepository = AppDataSource.getRepository(User);
 
   const userExists = await usersRepository.findOneBy({
@@ -22,7 +23,7 @@ const listPostsUserService = async (id: string) => {
     }
   });
   
-  return userPosts?.posts;
+  return userPosts!.posts;
 };
 
 export default listPostsUserService;

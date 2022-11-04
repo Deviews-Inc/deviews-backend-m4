@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { deleteTechController } from "../controllers/techs.controller";
+import { deleteTechController } from "../controllers/techs.controllers";
 import {
   createUserController,
   deleteUserController,
   listUsersController,
   readUserController,
   updateUserController,
-} from "../controllers/users.controller";
+} from "../controllers/users.controllers";
 import isActiveMiddleware from "../middlewares/isActive.middleware";
 import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
 
@@ -16,13 +16,13 @@ usersRoutes.post("", createUserController);
 usersRoutes.get(
   "",
   isLoggedInMiddleware,
-  
+
   listUsersController
 );
 usersRoutes.get(
   "/:id",
   isLoggedInMiddleware,
-  
+
   readUserController
 );
 usersRoutes.patch(

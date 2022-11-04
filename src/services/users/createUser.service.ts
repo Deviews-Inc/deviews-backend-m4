@@ -11,7 +11,7 @@ const createUserService = async ({
   password,
   bio,
   profilePicture,
-}: IUserRequest) => {
+}: IUserRequest): Promise<User> => {
   const userRepository = AppDataSource.getRepository(User);
 
   const userAlreadyExists = await userRepository.findOneBy({ email });
