@@ -7,10 +7,10 @@ class FirePosts {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @ManyToOne(() => User, (user) => user.firePosts)
+  @ManyToOne(() => User, (user) => user.fire_posts)
   user: User;
 
-  @ManyToOne(() => Posts, (posts) => posts.firePosts)
+  @ManyToOne(() => Posts, (posts) => posts.fire_posts)
   post: Posts;
 }
 

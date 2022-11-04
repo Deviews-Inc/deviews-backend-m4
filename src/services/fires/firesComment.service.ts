@@ -4,7 +4,10 @@ import FireComments from "../../entities/fireComments.entity";
 import User from "../../entities/user.entity";
 import AppError from "../../errors/appError";
 
-const firesCommentService = async (idComment: string, idUser: string) => {
+const firesCommentService = async (
+  idComment: string,
+  idUser: string
+): Promise<string> => {
   const firesCommentRepository = AppDataSource.getRepository(FireComments);
   const commentsRepository = AppDataSource.getRepository(Comments);
   const usersRepository = AppDataSource.getRepository(User);

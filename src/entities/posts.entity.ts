@@ -22,14 +22,20 @@ class Posts {
   createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.posts, {
-    eager: true
+    eager: true,
   })
   user: User;
 
-  @OneToMany(() => FirePosts, (fire) => fire.post)
-  firePosts: FirePosts[];
+  @OneToMany(() => FirePosts, (fire) => fire.post, {
+    cascade: true,
+    eager: true,
+  })
+  fire_posts: FirePosts[];
 
-  @OneToMany(() => Comments, (comments) => comments.post)
+  @OneToMany(() => Comments, (comments) => comments.post, {
+    cascade: true,
+    eager: true,
+  })
   comments: Comments[];
 }
 

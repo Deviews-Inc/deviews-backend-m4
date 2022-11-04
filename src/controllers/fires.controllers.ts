@@ -8,7 +8,7 @@ export const firesPostController = async (req: Request, res: Response) => {
 
   const createdFire = await firesPostService(idPost, idUser);
 
-  return res.status(200).json({
+  return res.json({
     message: createdFire,
   });
 };
@@ -19,7 +19,7 @@ export const firesCommentController = async (req: Request, res: Response) => {
 
   const createdFire = await firesCommentService(idComments, idUser);
 
-  return res.status(200).json({
+  return res.json({
     message: createdFire,
   });
 };
