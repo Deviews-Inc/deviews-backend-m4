@@ -2,7 +2,7 @@ import AppDataSource from "../../data-source";
 import Techs from "../../entities/techs.entity";
 import AppError from "../../errors/appError";
 
-const deleteTechService = async (id: string): Promise<string> => {
+const deleteTechService = async (id: string) => {
   const techRepository = AppDataSource.getRepository(Techs);
 
   const findTech = await techRepository.findOneBy({
@@ -15,7 +15,7 @@ const deleteTechService = async (id: string): Promise<string> => {
 
   await techRepository.delete(id);
 
-  return "Deleted tech";
+  return;
 };
 
 export default deleteTechService;

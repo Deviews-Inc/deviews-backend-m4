@@ -3,6 +3,7 @@ import AppError from "../../errors/appError";
 import { hash } from "bcryptjs";
 import User from "../../entities/user.entity";
 import { IUserRequest } from "../../interfaces/users";
+import Techs from "../../entities/techs.entity";
 
 const createUserService = async ({
   name,
@@ -10,10 +11,9 @@ const createUserService = async ({
   email,
   password,
   bio,
-  profilePicture,
-}: IUserRequest) => {
+  profile_picture,
+}: IUserRequest): Promise<User> => {
   const userRepository = AppDataSource.getRepository(User);
-
   const userAlreadyExists = await userRepository.findOneBy({ email });
 
   if (userAlreadyExists) {
@@ -26,7 +26,7 @@ const createUserService = async ({
     email,
     password: await hash(password, 10),
     bio,
-    profilePicture,
+    profile_picture,
   });
 
   await userRepository.save(user);

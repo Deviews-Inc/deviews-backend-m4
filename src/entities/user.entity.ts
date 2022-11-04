@@ -12,6 +12,7 @@ import Posts from "./posts.entity";
 import Comments from "./comments.entity";
 import FirePosts from "./firePosts.entity";
 import FireComments from "./fireComments.entity";
+import UsersTechs from "./usersTechs.entity";
 
 @Entity("users")
 class User {
@@ -35,26 +36,27 @@ class User {
   bio: string;
 
   @Column()
-  profilePicture: string;
+  profile_picture: string;
 
   @Column({ default: true })
   isActive: boolean;
 
-  @ManyToMany(() => Techs)
-  @JoinTable()
-  techs: Techs[];
+  @OneToMany(() => UsersTechs, (UsersTechs) => UsersTechs.user)
+  usersTechs: UsersTechs[];
 
-  @OneToMany(() => Posts, (posts) => posts.user)
+  @OneToMany(() => Posts, (posts) => posts.user, {
+    cascade: true,
+  })
   posts: Posts[];
 
   @OneToMany(() => Comments, (comments) => comments.user)
   comments: Comments[];
 
   @OneToMany(() => FirePosts, (fires) => fires.user)
-  firePosts: FirePosts[];
+  fire_posts: FirePosts[];
 
   @OneToMany(() => FireComments, (fires) => fires.user)
-  fireComments: FireComments[];
+  fire_comments: FireComments[];
 }
 
 export default User;

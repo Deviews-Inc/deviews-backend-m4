@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Techs from "../entities/techs.entity";
-import { ITechUpdate } from "../interfaces/techs";
 import allTechsService from "../services/techs/allTechs.service";
 import updateTechsService from "../services/techs/updateTechs.service";
 import createTechService from "../services/techs/createTech.service";
@@ -15,22 +14,22 @@ export const createTechController = async (req: Request, res: Response) => {
 
 export const deleteTechController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const deletedTech = await deleteTechService(id);
+  await deleteTechService(id);
 
-  return res.status(204).json(deletedTech);
+  return res.status(204).send();
 };
 
 export const allTechsController = async (req: Request, res: Response) => {
   const techs = await allTechsService();
 
-  return res.status(200).json(techs);
+  return res.json(techs);
 };
 
 export const updateTechsController = async (req: Request, res: Response) => {
-  const tech: ITechUpdate = req.body;
+  const tech = req.body;
   tech.id = req.params.id;
   const updatedTech = await updateTechsService(tech);
   if (updatedTech instanceof Techs) {
-    return res.status(200).json(updatedTech);
+    return res.json(updatedTech);
   }
 };

@@ -2,15 +2,17 @@ import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
 import AppError from "../../errors/appError";
 
-const readUserService = async (id: string): Promise<User> => {
+const retrieveUserService = async (id: string): Promise<User> => {
   const usersRepository = AppDataSource.getRepository(User);
   const user = await usersRepository.findOneBy({
-    id
+    id,
   });
-  if (!user){
-    throw new AppError("User does not exists", 404);
-  }
-  return user!;
-}
 
-export default readUserService;
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+
+  return user;
+};
+
+export default retrieveUserService;
