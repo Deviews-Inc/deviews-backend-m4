@@ -3,7 +3,6 @@ import { IPostRequest } from "../interfaces/posts";
 import createPostService from "../services/posts/createPost.service";
 import deletePostService from "../services/posts/deletePost.service";
 
-//codar aqui
 export const deletePostController = async (req: Request, res: Response) => {
   const { id } = req.params;
   await deletePostService(id);
