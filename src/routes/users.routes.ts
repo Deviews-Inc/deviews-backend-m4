@@ -26,6 +26,7 @@ usersRoutes.patch(
   isActiveMiddleware,
   updateUserController
 );
+
 usersRoutes.delete("/:id", isLoggedInMiddleware, deleteUserController);
 
 export default usersRoutes;
