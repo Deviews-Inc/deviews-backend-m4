@@ -28,17 +28,19 @@ const firesPostService = async (
     throw new AppError("User not found", 404);
   }
 
-  const verifyFirePost = await firesPostRepository.findOneBy({
-    post: post,
-    user: user,
+  const fires = await firesPostRepository.find({
+    relations: {
+      user: true,
+      post: true,
+    },
   });
 
+  const verifyFirePost = fires.find(
+    (elem) => elem.post.id === idPost && elem.user.id === idUser
+  );
+
   if (verifyFirePost) {
-    await AppDataSource.createQueryBuilder()
-      .delete()
-      .from(FirePosts)
-      .where("id = id:id", { id: verifyFirePost.id })
-      .execute();
+    await firesPostRepository.delete(verifyFirePost.id);
 
     return "Desfire";
   }
