@@ -29,7 +29,7 @@ class Posts {
 
   @OneToMany(() => FirePosts, (fire) => fire.post, {
     cascade: true,
-    eager: true,
+    eager: true
   })
   fire_posts: FirePosts[];
 

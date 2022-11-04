@@ -24,7 +24,9 @@ class Comments {
   @ManyToOne(() => User, (user) => user.comments)
   user: User;
 
-  @OneToMany(() => FireComments, (fires) => fires.user)
+  @OneToMany(() => FireComments, (fires) => fires.comments, {
+    cascade: true,
+  })
   fires: FireComments[];
 
   @ManyToOne(() => Posts, (posts) => posts.comments)

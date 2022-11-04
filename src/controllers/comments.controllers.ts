@@ -1,3 +1,4 @@
+import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import createCommentsService from "../services/comments/createComments.service";
 import deleteCommentsService from "../services/comments/deleteComments.service";
@@ -9,7 +10,7 @@ export const createCommentsController = async (req: Request, res: Response) => {
   data.post = req.params.id;
 
   const createComment = await createCommentsService(data);
-  return res.status(201).json(createComment);
+  return res.status(201).json(instanceToPlain(createComment));
 };
 
 export const updateCommentsController = async (req: Request, res: Response) => {
