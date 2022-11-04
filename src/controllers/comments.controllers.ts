@@ -24,6 +24,7 @@ export const updateCommentsController = async (req: Request, res: Response) => {
 
 export const deleteCommentController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  await deleteCommentsService(id);
+  const userId = req.user.id;
+  await deleteCommentsService(id, userId);
   return res.status(204).send();
 };
