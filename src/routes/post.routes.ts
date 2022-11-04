@@ -17,6 +17,6 @@ postRoutes.delete("/:id", isLoggedInMiddleware, deletePostController);
 postRoutes.get("", isLoggedInMiddleware, listPostsController);
 postRoutes.get("/:id", isLoggedInMiddleware, retrievePostController);
 postRoutes.get("/user/:id", isLoggedInMiddleware, listPostsUserController);
-postRoutes.patch("/:id", updatePostController);
+postRoutes.patch("/:id", isLoggedInMiddleware, updatePostController);
 
 export default postRoutes;

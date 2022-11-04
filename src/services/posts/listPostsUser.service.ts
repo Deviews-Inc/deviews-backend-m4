@@ -22,7 +22,6 @@ const listPostsUserService = async (id: string): Promise<Posts[]> => {
       posts: true,
     },
   });
-
   return userPosts!.posts;
 };
 

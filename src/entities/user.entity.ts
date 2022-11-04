@@ -44,7 +44,9 @@ class User {
   @OneToMany(() => UsersTechs, (UsersTechs) => UsersTechs.user)
   usersTechs: UsersTechs[];
 
-  @OneToMany(() => Posts, (posts) => posts.user)
+  @OneToMany(() => Posts, (posts) => posts.user, {
+    cascade: true,
+  })
   posts: Posts[];
 
   @OneToMany(() => Comments, (comments) => comments.user)

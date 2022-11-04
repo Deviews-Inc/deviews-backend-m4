@@ -3,7 +3,7 @@ import User from "../../entities/user.entity";
 const listUsersService = async (): Promise<User[]> => {
   const usersRepository = AppDataSource.getRepository(User);
   const users = await usersRepository.find();
-
+  
   return users;
 };
 

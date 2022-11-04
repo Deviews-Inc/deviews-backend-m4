@@ -1,8 +1,13 @@
 import { Router } from "express";
-import { createCommentsController } from "../controllers/comments.controllers";
+import {
+  createCommentsController,
+  deleteCommentController,
+} from "../controllers/comments.controllers";
+import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
 
-const CommentRoutes = Router();
+const commentRoutes = Router();
 
-CommentRoutes.post("", createCommentsController);
+commentRoutes.post("/:id", isLoggedInMiddleware, createCommentsController);
+commentRoutes.delete("/:id", isLoggedInMiddleware, deleteCommentController);
 
-export default CommentRoutes;
+export default commentRoutes;

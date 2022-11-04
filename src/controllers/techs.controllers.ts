@@ -12,6 +12,13 @@ export const createTechController = async (req: Request, res: Response) => {
   return res.status(201).json(createdTech);
 };
 
+export const deleteTechController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  await deleteTechService(id);
+
+  return res.status(204).send();
+};
+
 export const allTechsController = async (req: Request, res: Response) => {
   const techs = await allTechsService();
 
@@ -25,11 +32,4 @@ export const updateTechsController = async (req: Request, res: Response) => {
   if (updatedTech instanceof Techs) {
     return res.json(updatedTech);
   }
-};
-
-export const deleteTechController = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  await deleteTechService(id);
-
-  return res.status(204).send();
 };

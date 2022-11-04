@@ -18,12 +18,13 @@ class Posts {
   @Column({ length: 140 })
   content: string;
 
+  @Column({ nullable: true })
+  image: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.posts, {
-    eager: true,
-  })
+  @ManyToOne(() => User, (user) => user.posts)
   user: User;
 
   @OneToMany(() => FirePosts, (fire) => fire.post, {
