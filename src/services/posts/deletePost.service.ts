@@ -11,13 +11,8 @@ const deletePostService = async (id: string) => {
   if (!verifyPost) {
     throw new AppError("Post not exists", 400);
   }
-  
-  await AppDataSource.createQueryBuilder()
-    .delete()
-    .from(Posts)
-    .where("id = :id", { id: id })
-    .execute();
 
+  await postRepository.delete(id);
   return;
 };
 

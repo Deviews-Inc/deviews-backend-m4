@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-
+import "dotenv/config";
 const isLoggedInMiddleware = async (
   req: Request,
   res: Response,
@@ -21,9 +21,9 @@ const isLoggedInMiddleware = async (
 
     req.user = {
       id: decoded.id,
-      isActive: decoded.isActive
-    }
-    
+      isActive: decoded.isActive,
+    };
+
     return next();
   });
 };
