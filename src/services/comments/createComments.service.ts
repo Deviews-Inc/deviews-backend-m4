@@ -9,7 +9,7 @@ const createCommentsService = async ({
   content,
   user,
   post,
-}: ICommentsRequest): Promise<Comments> => {
+}: ICommentsRequest) => {
   const commentsRepository = AppDataSource.getRepository(Comments);
   const userRepository = AppDataSource.getRepository(User);
   const postRepository = AppDataSource.getRepository(Posts);
@@ -23,7 +23,7 @@ const createCommentsService = async ({
   });
 
   if (!searchPost) {
-    throw new AppError("Post does not exist");
+    throw new AppError("Post not found", 404);
   }
 
   const postExits = await commentsRepository.findOneBy({
@@ -32,7 +32,7 @@ const createCommentsService = async ({
   });
 
   if (postExits) {
-    throw new AppError("existing post");
+    throw new AppError("This post already exists", 409);
   }
 
   const newComment = commentsRepository.create({
@@ -43,7 +43,17 @@ const createCommentsService = async ({
 
   await commentsRepository.save(newComment);
 
-  return newComment;
+  const returnComment = await commentsRepository.find({
+    where: {
+      id: newComment.id,
+    },
+    relations: {
+      post: false,
+      user: false,
+    },
+  });
+
+  return returnComment[0]!;
 };
 
 export default createCommentsService;

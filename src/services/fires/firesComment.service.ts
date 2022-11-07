@@ -24,22 +24,23 @@ const firesCommentService = async (
     id: idUser,
   });
 
-  
   if (!user) {
-    throw new AppError("User not found");
+    throw new AppError("User not found", 404);
   }
 
   const fires = await firesCommentRepository.find({
     relations: {
       user: true,
-      comments: true
-    }
-  })
-  
-  const verifyFireComment = fires.find(elem => elem.comments.id === idComment && elem.user.id === idUser)
+      comments: true,
+    },
+  });
+
+  const verifyFireComment = fires.find(
+    (elem) => elem.comments.id === idComment && elem.user.id === idUser
+  );
 
   if (verifyFireComment) {
-    await firesCommentRepository.delete(verifyFireComment.id)
+    await firesCommentRepository.delete(verifyFireComment.id);
 
     return "Desfire";
   }

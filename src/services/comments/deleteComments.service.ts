@@ -4,23 +4,20 @@ import AppError from "../../errors/appError";
 
 const deleteCommentsService = async (id: string, userId: string) => {
   const commentRepository = AppDataSource.getRepository(Comments);
-  const commentExists = await commentRepository.findOneBy({
-    id,
+  const commentExists = await commentRepository.findOne({
+    where: { id },
+    relations: { user: true },
   });
 
   if (!commentExists) {
-    throw new AppError("Comment does not exists", 404);
+    throw new AppError("Comment not found", 404);
   }
 
-  if (commentExists!.user.id !== userId) {
-    throw new AppError("Unauthorized user", 401);
+  if (commentExists.user.id !== userId) {
+    throw new AppError("You're not the owner of this post", 401);
   }
 
-  await AppDataSource.createQueryBuilder()
-    .delete()
-    .from(Comments)
-    .where("id = :id", { id: id })
-    .execute();
+  await commentRepository.delete(id);
 
   return;
 };

@@ -13,7 +13,7 @@ const createTechService = async ({
   });
 
   if (techAlreadyExists) {
-    throw new AppError("Tech already exists");
+    throw new AppError("Tech already exists", 409);
   }
 
   const tech = techRepository.create({

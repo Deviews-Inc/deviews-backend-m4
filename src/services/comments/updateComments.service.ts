@@ -1,6 +1,5 @@
 import AppDataSource from "../../data-source";
 import Comments from "../../entities/comments.entity";
-import User from "../../entities/user.entity";
 import AppError from "../../errors/appError";
 import { ICommentUpdate } from "../../interfaces/comments";
 
@@ -10,13 +9,10 @@ const updateCommentsService = async (
   data: ICommentUpdate
 ): Promise<Comments> => {
   const commentRepository = AppDataSource.getRepository(Comments);
-  const userRepository = AppDataSource.getRepository(User);
 
   const keys = Object.keys(data);
 
   const { content } = data;
-
-  const user = await userRepository.findOneBy({ id: userId });
 
   const comment = await commentRepository.findOne({
     where: { id },
@@ -28,7 +24,7 @@ const updateCommentsService = async (
   }
 
   if (comment.user.id !== userId) {
-    throw new AppError("Not allowed to update", 403);
+    throw new AppError("You're not the owner of this post", 401);
   }
 
   if (

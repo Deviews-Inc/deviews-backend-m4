@@ -2,17 +2,24 @@ import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
 import AppError from "../../errors/appError";
 
-const retrieveUserService = async (id: string): Promise<User> => {
+const retrieveUserService = async (id: string) => {
   const usersRepository = AppDataSource.getRepository(User);
-  const user = await usersRepository.findOneBy({
-    id,
+  const returnUser = await usersRepository.find({
+    where: {
+      id: id,
+    },
+    relations: {
+      usersTechs: {
+        techs: true,
+      },
+    },
   });
 
-  if (!user) {
+  if (!returnUser) {
     throw new AppError("User not found", 404);
   }
 
-  return user;
+  return returnUser;
 };
 
 export default retrieveUserService;

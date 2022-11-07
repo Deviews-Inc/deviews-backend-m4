@@ -11,32 +11,40 @@ const createPostService = async (
   const postRepository = AppDataSource.getRepository(Posts);
   const userRepository = AppDataSource.getRepository(User);
 
+  if (!content && !image) {
+    throw new AppError("Cannot make an empty post", 403);
+  }
+
+  if (content === "" && image === "") {
+    throw new AppError("Cannot make an empty post", 403);
+  }
+
   const user = await userRepository.findOneBy({
     id: userId,
   });
 
-  if (!user){
-    throw new AppError("User does not exists", 404);
+  if (!user) {
+    throw new AppError("User not found", 404);
   }
 
   const newPost = postRepository.create({
     content,
     image,
-    user: user!
+    user: user!,
   });
 
   await postRepository.save(newPost);
 
   const post = await postRepository.findOne({
     where: {
-      id: newPost.id
-    }, 
-    relations:{
+      id: newPost.id,
+    },
+    relations: {
       user: true,
       fire_posts: true,
-      comments: true
-    }
-  })
+      comments: true,
+    },
+  });
 
   return post!;
 };

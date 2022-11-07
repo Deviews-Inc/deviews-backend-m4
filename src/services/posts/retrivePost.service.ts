@@ -11,6 +11,7 @@ const retrievePostService = async (id: string) => {
         user: true,
       },
       comments: {
+        user: true,
         fires: {
           user: true,
         },
@@ -22,6 +23,7 @@ const retrievePostService = async (id: string) => {
         name: true,
         username: true,
         profile_picture: true,
+        usersTechs: false,
       },
       fire_posts: {
         id: true,
@@ -30,13 +32,16 @@ const retrievePostService = async (id: string) => {
         },
       },
       comments: {
+        user: {
+          id: true,
+          name: true,
+          username: true,
+          profile_picture: true,
+        },
         fires: {
           id: true,
           user: {
             id: true,
-            name: true,
-            username: true,
-            profile_picture: true,
           },
         },
       },

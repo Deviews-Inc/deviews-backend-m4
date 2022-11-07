@@ -25,6 +25,7 @@ export interface IUserUpdate {
   id?: string;
   isActive?: boolean;
   userId: string;
+  techs?: string[];
 }
 
 export interface IUserRequest {
@@ -34,5 +35,5 @@ export interface IUserRequest {
   password: string;
   bio: string;
   profile_picture: string;
-  users_techs_id: string;
+  techs: string[];
 }

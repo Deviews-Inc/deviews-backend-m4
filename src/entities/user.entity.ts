@@ -53,7 +53,7 @@ class User {
   comments: Comments[];
 
   @OneToMany(() => FirePosts, (fires) => fires.user, {
-    cascade: true
+    cascade: true,
   })
   fire_posts: FirePosts[];
 
