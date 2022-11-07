@@ -70,7 +70,7 @@ Endpoint para a realização de login de usuário.
 }
 ```
 
-`POST /login - FORMATO DE RESPOSTA`
+`POST /login - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -95,7 +95,7 @@ Endpoint para a realização de login de usuário.
 Vazio
 ```
 
-`GET /techs - FORMATO DE RESPOSTA`
+`GET /techs - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -116,6 +116,8 @@ Nenhum, máximo que pode acontecer é retornar uma lista vazia
 
 ## Rotas que precisam de autenticação
 
+<br>
+
 <h2 align = "center">Todos os usuários</h2>
 
 `GET /users - FORMATO DE REQUISIÇÃO`
@@ -124,7 +126,7 @@ Nenhum, máximo que pode acontecer é retornar uma lista vazia
 Vazio
 ```
 
-`GET /users - FORMATO DE RESPOSTA`
+`GET /users - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -167,7 +169,7 @@ Nenhum, máximo que pode acontecer é retornar uma lista vazia
 Vazio
 ```
 
-`GET /users/:id - FORMATO DE RESPOSTA`
+`GET /users/:id - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -203,7 +205,7 @@ Vazio
 }
 ```
 
-`POST /posts - FORMATO DE RESPOSTA`
+`POST /posts - FORMATO DE RESPOSTA - STATUS 201`
 
 ```json
 {
@@ -241,7 +243,7 @@ Vazio
 Vazio
 ```
 
-`GET /posts - FORMATO DE RESPOSTA`
+`GET /posts - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -299,7 +301,7 @@ Nenhum, máximo que pode acontecer é retornar uma lista vazia
 Vazio
 ```
 
-`GET /posts/:id - FORMATO DE RESPOSTA`
+`GET /posts/:id - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -330,7 +332,7 @@ Vazio
 | -------------- | --------------- |
 | 404 Not found  | Post not found. |
 
-<h2 align = "center"> Lista posts de um usário </h2>
+<h2 align = "center"> Lista posts de um usuário </h2>
 
 `GET /posts/user/:id - FORMATO DE REQUISIÇÃO`
 
@@ -338,7 +340,7 @@ Vazio
 Vazio
 ```
 
-`GET /posts/user/:id - FORMATO DE RESPOSTA`
+`GET /posts/user/:id - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -384,7 +386,7 @@ Vazio
 }
 ```
 
-`PATCH /posts/:id - FORMATO DE RESPOSTA`
+`PATCH /posts/:id - FORMATO DE RESPOSTA - STATUS 200`
 
 ```json
 {
@@ -396,6 +398,179 @@ Vazio
     "fire_posts": [],
     "comments": []
   }
+}
+```
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not found  | Post not found. |
+
+`DELETE /posts/:id - FORMATO DE REQUISIÇÃO`
+
+```json
+Vazio
+```
+
+`DELETE /posts/:id - FORMATO DE RESPOSTA - STATUS 204`
+
+```json
+No body returned for response
+```
+
+### Possíveis erros:
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not found  | Post not found. |
+
+<h2 align = "center">Criar comentários</h2>
+
+`POST /comments/:id_post - FORMATO DE REQUISIÇÃO`
+
+```json
+{
+  "content": "comentario 1243"
+}
+```
+
+`POST /comments/:id_post - FORMATO DE RESPOSTA - STATUS 201`
+
+```json
+{
+  "data": {
+    "content": "comentario 1243",
+    "user": {
+      "id": "88201de1-f0b6-4072-bfed-06448c114c26",
+      "name": "condessa",
+      "username": "condessa",
+      "email": "condessa@user.com",
+      "bio": "Just a Belgian Shepperd dev",
+      "profile_picture": "https://i.pinimg.com/originals/d6/ed/b5/d6edb5184680cf427624dcc6cacf01f5.jpg",
+      "isActive": true
+    },
+    "post": {
+      "id": "8c401d8b-78fa-4c76-bf3d-28fa71051690",
+      "content": "post #11",
+      "image": null,
+      "createdAt": "2022-11-05T14:26:33.511Z",
+      "fire_posts": [
+        {
+          "id": "4e52bfeb-5eba-4650-a43e-d80d7fb65177"
+        }
+      ],
+      "comments": []
+    },
+    "id": "70f142bb-9ebb-4b80-98c1-177e6350299c",
+    "createdAt": "2022-11-07T19:17:59.276Z"
+  }
+}
+```
+
+### Possíveis erros:
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not found  | Post not found. |
+
+<h2 align = "center">Editar comentário</h2>
+
+`PATCH /comments/:id - FORMATO DE REQUISIÇÃO`
+
+```json
+{
+  "content": "comentário editado"
+}
+```
+
+`PATCH /comments/:id - FORMATO DE RESPOSTA - STATUS 200`
+
+```json
+{
+  "data": {
+    "id": "70f142bb-9ebb-4b80-98c1-177e6350299c",
+    "content": "opa",
+    "createdAt": "2022-11-07T19:17:59.276Z"
+  }
+}
+```
+
+### Possíveis erros:
+
+| Código do Erro | Descrição          |
+| -------------- | ------------------ |
+| 404 Not found  | Comment not found. |
+
+`DELETE /comments/:id - FORMATO DE REQUISIÇÃO`
+
+```json
+Vazio
+```
+
+`DELETE /comments/:id - FORMATO DE RESPOSTA - STATUS 204`
+
+```json
+No body returned for response
+```
+
+### Possíveis erros:
+
+| Código do Erro | Descrição          |
+| -------------- | ------------------ |
+| 404 Not found  | Comment not found. |
+
+<h2 align ="center">Fire/desfire posts</h2>
+
+`POST /fires/posts/:id_post`
+
+```json
+Vazio
+```
+
+`POST /fires/posts/:id_post - FORMATO DE REPOSTA - STATUS 200`
+
+Caso o fire ainda não exista nesse post é retornado:
+
+```json
+{
+  "message": "fire"
+}
+```
+
+Caso o fire já exista nesse post o mesmo é removido, sendo o seguinte retorno:
+
+```json
+{
+  "message": "desfire"
+}
+```
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not found  | Post not found. |
+
+<h2 align ="center">Fire/desfire comentários</h2>
+
+`POST /fires/comments/:id_comment`
+
+```json
+Vazio
+```
+
+`POST /fires/comments/:id_comment - FORMATO DE REPOSTA - STATUS 200`
+
+Caso o fire ainda não exista nesse comentário é retornado:
+
+```json
+{
+  "message": "fire"
+}
+```
+
+Caso o fire já exista nesse comentário o mesmo é removido, sendo o seguinte retorno:
+
+```json
+{
+  "message": "desfire"
 }
 ```
 
