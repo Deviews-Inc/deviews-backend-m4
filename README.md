@@ -298,3 +298,107 @@ Nenhum, máximo que pode acontecer é retornar uma lista vazia
 ```json
 Vazio
 ```
+
+`GET /posts/:id - FORMATO DE RESPOSTA`
+
+```json
+{
+  "data": [
+    [
+      {
+        "id": "aaea167e-3568-41d8-8bd5-6f1f2c69ab7c",
+        "content": "assim que o exercito recuou lutando para cruzar o Danúbio, com Potiômkin cobrindo a retaguarda sendo o ultimo a atravessar.",
+        "image": null,
+        "createdAt": "2022-11-07T18:25:04.959Z",
+        "user": {
+          "id": "88201de1-f0b6-4072-bfed-06448c114c26",
+          "name": "condessa",
+          "username": "condessa",
+          "profile_picture": "https://i.pinimg.com/originals/d6/ed/b5/d6edb5184680cf427624dcc6cacf01f5.jpg"
+        },
+        "fire_posts": [],
+        "comments": []
+      }
+    ]
+  ]
+}
+```
+
+### Possíveis erros:
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not found  | Post not found. |
+
+<h2 align = "center"> Lista posts de um usário </h2>
+
+`GET /posts/user/:id - FORMATO DE REQUISIÇÃO`
+
+```json
+Vazio
+```
+
+`GET /posts/user/:id - FORMATO DE RESPOSTA`
+
+```json
+{
+  "data": [
+    {
+      "id": "8c401d8b-78fa-4c76-bf3d-28fa71051690",
+      "content": "post #11",
+      "image": null,
+      "createdAt": "2022-11-05T14:26:33.511Z",
+      "fire_posts": [
+        {
+          "id": "4e52bfeb-5eba-4650-a43e-d80d7fb65177"
+        }
+      ],
+      "comments": []
+    },
+    {
+      "id": "aaea167e-3568-41d8-8bd5-6f1f2c69ab7c",
+      "content": "oi familiassss",
+      "image": null,
+      "createdAt": "2022-11-07T18:25:04.959Z",
+      "fire_posts": [],
+      "comments": []
+    }
+  ]
+}
+```
+
+### Possíveis erros:
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not found  | User not found. |
+
+<h2 align = "center"> Editar um post </h2>
+
+`PATCH /posts/:id - FORMATO DE REQUISIÇÃO`
+
+```json
+{
+  "content": "post alterado",
+  "image": "123.jpg"
+}
+```
+
+`PATCH /posts/:id - FORMATO DE RESPOSTA`
+
+```json
+{
+  "data": {
+    "id": "aaea167e-3568-41d8-8bd5-6f1f2c69ab7c",
+    "content": "post alterado",
+    "image": null,
+    "createdAt": "2022-11-07T18:25:04.959Z",
+    "fire_posts": [],
+    "comments": []
+  }
+}
+```
+
+| Código do Erro | Descrição       |
+| -------------- | --------------- |
+| 404 Not found  | Post not found. |
