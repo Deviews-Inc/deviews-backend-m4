@@ -4,6 +4,7 @@ import { hash } from "bcryptjs";
 import User from "../../entities/user.entity";
 import { IUserRequest } from "../../interfaces/users";
 import Techs from "../../entities/techs.entity";
+import UsersTechs from "../../entities/usersTechs.entity";
 
 const createUserService = async ({
   name,
@@ -12,13 +13,29 @@ const createUserService = async ({
   password,
   bio,
   profile_picture,
-}: IUserRequest): Promise<User> => {
+  techs,
+}: IUserRequest) => {
   const userRepository = AppDataSource.getRepository(User);
-  const userAlreadyExists = await userRepository.findOneBy({ email });
-
-  if (userAlreadyExists) {
-    throw new AppError("User already exists");
+  const techRepository = AppDataSource.getRepository(Techs);
+  const usersTechsRepository = AppDataSource.getRepository(UsersTechs);
+  const emailAlreadyExists = await userRepository.findOneBy({ email });
+  const usernameAlreadyExists = await userRepository.findOneBy({ username });
+  if (emailAlreadyExists) {
+    throw new AppError("Email already exists", 409);
   }
+  if (usernameAlreadyExists) {
+    throw new AppError("Username already exists", 409);
+  }
+
+  techs.forEach(async (tech) => {
+    const techVerifyExists = await techRepository.findOneBy({
+      id: tech,
+    });
+
+    if (!techVerifyExists) {
+      throw new AppError("Tech not found", 404);
+    }
+  });
 
   const user = userRepository.create({
     name,
@@ -28,10 +45,31 @@ const createUserService = async ({
     bio,
     profile_picture,
   });
-
   await userRepository.save(user);
 
-  return user;
-};
+  await Promise.all(
+    techs.map(async (tech) => {
+      const techs = await techRepository.findOneBy({ id: tech });
+      const userTech = usersTechsRepository.create({
+        techs: techs!,
+        user: user,
+      });
 
+      await usersTechsRepository.save(userTech);
+    })
+  );
+
+  const returnUser = await userRepository.find({
+    where: {
+      id: user.id,
+    },
+    relations: {
+      usersTechs: {
+        techs: true,
+      },
+    },
+  });
+
+  return returnUser;
+};
 export default createUserService;

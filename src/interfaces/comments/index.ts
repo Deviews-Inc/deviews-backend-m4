@@ -10,7 +10,7 @@ export interface ICommentsRequest {
   content: string;
   user: string;
   post: string;
-  }
+}
 
 export interface ICommentUpdate extends IComment {
   id: string;
@@ -18,4 +18,6 @@ export interface ICommentUpdate extends IComment {
   user: User;
   comments: Comments;
   firePosts: FirePosts;
+  id_user: string;
+  image?: string;
 }

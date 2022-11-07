@@ -10,7 +10,7 @@ export const createCommentsController = async (req: Request, res: Response) => {
   data.post = req.params.id;
 
   const createComment = await createCommentsService(data);
-  return res.status(201).json(instanceToPlain(createComment));
+  return res.status(201).json({ data: instanceToPlain(createComment) });
 };
 
 export const updateCommentsController = async (req: Request, res: Response) => {
@@ -21,7 +21,9 @@ export const updateCommentsController = async (req: Request, res: Response) => {
 
   const updateComment = await updateCommentsService(id, userId, data);
 
-  return res.json(updateComment);
+  return res.json({
+    data: updateComment,
+  });
 };
 
 export const deleteCommentController = async (req: Request, res: Response) => {
