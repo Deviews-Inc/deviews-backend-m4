@@ -50,8 +50,7 @@ const retrievePostService = async (id: string) => {
       id,
     },
   });
-
-  if (!post) {
+  if (post.length === 0) {
     throw new AppError("Post not found", 404);
   }
 
