@@ -1,6 +1,6 @@
 # Deviews Api
 
-Essa é a API da Deviews
+Este é o backend da aplicação Deviews! O objetivo dessa aplicação é permitir que o usuário cadastrado possa se conectar com outras pessoas desenvolvedoras da comunidade, compartilhando conhecimento e dividindo experiências. 
 
 ## **Endpoints**
 
