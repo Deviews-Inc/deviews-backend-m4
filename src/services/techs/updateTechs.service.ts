@@ -3,7 +3,6 @@ import Techs from "../../entities/techs.entity";
 import AppError from "../../errors/appError";
 import { ITechUpdate } from "../../interfaces/techs";
 
-
 const updateTechsService = async ({
   tech_name,
   id,
