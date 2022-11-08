@@ -5,12 +5,11 @@ import {
   createTechController,
   deleteTechController,
 } from "../controllers/techs.controllers";
-import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
 
 const techsRoutes = Router();
 
 techsRoutes.post("", createTechController);
 techsRoutes.get("", allTechsController);
-techsRoutes.patch("", updateTechsController);
-techsRoutes.delete("/techs/:id", deleteTechController);
+techsRoutes.patch("/:id", updateTechsController);
+techsRoutes.delete("/:id", deleteTechController);
 export default techsRoutes;
