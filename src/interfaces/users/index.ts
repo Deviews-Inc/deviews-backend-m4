@@ -24,7 +24,7 @@ export interface IUserUpdate {
   profile_picture?: string;
   id?: string;
   isActive?: boolean;
-  userId: string;
+  userId?: string;
   techs?: string[];
 }
 

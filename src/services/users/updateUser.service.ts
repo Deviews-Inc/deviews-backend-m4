@@ -17,8 +17,8 @@ const updateUserService = async ({
   userId,
   techs,
 }: IUserUpdate) => {
-  if (id || isActive) {
-    throw new AppError("id and isActive fields cannot be updated");
+  if (id !== undefined || isActive !== undefined) {
+    throw new AppError("id and isActive fields cannot be updated", 401);
   }
   const userRepository = AppDataSource.getRepository(User);
   const techRepository = AppDataSource.getRepository(Techs);
