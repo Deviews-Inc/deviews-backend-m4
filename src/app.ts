@@ -8,8 +8,10 @@ import postRoutes from "./routes/post.routes";
 import firesRoutes from "./routes/fire.routes";
 import techsRoutes from "./routes/techs.routes";
 import CommentRoutes from "./routes/comments.routes";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use("/users", userRoutes);
 app.use("/login", sessionRoutes);
