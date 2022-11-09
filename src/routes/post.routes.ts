@@ -7,7 +7,6 @@ import {
   retrievePostController,
   updatePostController,
 } from "../controllers/posts.controllers";
-import isActiveMiddleware from "../middlewares/isActive.middleware";
 import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
 
 const postRoutes = Router();
