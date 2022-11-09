@@ -10,7 +10,9 @@ class FirePosts {
   @ManyToOne(() => User, (user) => user.fire_posts)
   user: User;
 
-  @ManyToOne(() => Posts, (posts) => posts.fire_posts)
+  @ManyToOne(() => Posts, (posts) => posts.fire_posts, {
+    onDelete: "CASCADE",
+  })
   post: Posts;
 }
 

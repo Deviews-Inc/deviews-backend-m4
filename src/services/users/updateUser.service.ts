@@ -17,9 +17,6 @@ const updateUserService = async ({
   userId,
   techs,
 }: IUserUpdate) => {
-  if (id !== undefined || isActive !== undefined) {
-    throw new AppError("id and isActive fields cannot be updated", 401);
-  }
   const userRepository = AppDataSource.getRepository(User);
   const techRepository = AppDataSource.getRepository(Techs);
   const usersTechsRepository = AppDataSource.getRepository(UsersTechs);
@@ -27,8 +24,14 @@ const updateUserService = async ({
     id: userId,
   });
 
+  console.log(findUser);
+
   if (!findUser) {
     throw new AppError("User not found", 404);
+  }
+
+  if (id !== undefined || isActive !== undefined) {
+    throw new AppError("id and isActive fields cannot be updated", 401);
   }
 
   if (techs) {

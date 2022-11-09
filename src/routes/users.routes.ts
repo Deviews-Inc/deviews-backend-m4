@@ -9,6 +9,7 @@ import {
 } from "../controllers/users.controllers";
 import isActiveMiddleware from "../middlewares/isActive.middleware";
 import isLoggedInMiddleware from "../middlewares/isLoggedIn.middleware";
+import verifyOwnerAccountMiddleware from "../middlewares/verifyOwnerAccount.middleware";
 
 const usersRoutes = Router();
 
@@ -23,10 +24,16 @@ usersRoutes.get("/:id", isLoggedInMiddleware, retrieveUserController);
 usersRoutes.patch(
   "/:id",
   isLoggedInMiddleware,
+  verifyOwnerAccountMiddleware,
   isActiveMiddleware,
   updateUserController
 );
 
-usersRoutes.delete("/:id", isLoggedInMiddleware, deleteUserController);
+usersRoutes.delete(
+  "/:id",
+  isLoggedInMiddleware,
+  verifyOwnerAccountMiddleware,
+  deleteUserController
+);
 
 export default usersRoutes;
