@@ -3,10 +3,12 @@ import AppDataSource from "../../../data-source";
 import request from "supertest";
 import app from "../../../app";
 import {
+  mockedNewUser,
   mockedUser,
   mockedUserLogin,
   mockedUserUpdate,
 } from "../../mocks/Users";
+import { mockedTech } from "../../mocks/Techs";
 
 describe("/users", () => {
   let connection: DataSource;
@@ -26,6 +28,8 @@ describe("/users", () => {
   });
 
   test("POST /users - Must be able to create a user", async () => {
+    const createTech = await request(app).post("/techs").send(mockedTech);
+    mockedUser.techs.push(`${createTech.body.data.id}`);
     const response = await request(app).post("/users").send(mockedUser);
 
     expect(response.body.data[0]).toHaveProperty("id");
@@ -46,6 +50,10 @@ describe("/users", () => {
       "https://i.pinimg.com/originals/2f/e1/ba/2fe1ba81feb387b9653e72a1fee11104.png"
     );
     expect(response.body.data[0].isActive).toEqual(true);
+    expect(response.body.data[0].usersTechs).toHaveLength(1);
+    expect(response.body.data[0].usersTechs[0].techs.tech_name).toEqual(
+      "React"
+    );
   });
 
   test("POST /users - Should not be able to create a user that already exists", async () => {
@@ -229,6 +237,21 @@ describe("/users", () => {
       .delete(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`)
       .set("Authorization", `Bearer ${loginResponse.body.token}`);
     expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty("message");
+  });
+
+  test("DELETE - Shouldn't be able to delete the user if you don't own the account", async () => {
+    const newUser = await request(app).post("/users").send(mockedNewUser);
+    await request(app).post("/users").send(mockedUser);
+
+    const loginResponse = await request(app)
+      .post("/login")
+      .send(mockedUserLogin);
+
+    const response = await request(app)
+      .delete(`/users/${newUser.body.data[0].id}`)
+      .set("Authorization", `Bearer ${loginResponse.body.token}`);
+    expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");
   });
 });
