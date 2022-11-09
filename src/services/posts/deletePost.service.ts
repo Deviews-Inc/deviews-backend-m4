@@ -13,12 +13,12 @@ const deletePostService = async (id: string, idUser: string) => {
     },
   });
 
-  if (verifyPost[0].user.id != idUser) {
-    throw new AppError("You're not the owner of this post", 401);
+  if (!verifyPost[0]) {
+    throw new AppError("Post not found", 404);
   }
 
-  if (!verifyPost) {
-    throw new AppError("Post not found", 404);
+  if (verifyPost[0].user.id != idUser) {
+    throw new AppError("You're not the owner of this post", 401);
   }
 
   await postRepository.delete(id);
