@@ -29,7 +29,9 @@ class Comments {
   })
   fires: FireComments[];
 
-  @ManyToOne(() => Posts, (posts) => posts.comments)
+  @ManyToOne(() => Posts, (posts) => posts.comments, {
+    onDelete: "CASCADE",
+  })
   post: Posts;
 }
 export default Comments;

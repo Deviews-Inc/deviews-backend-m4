@@ -1,6 +1,5 @@
 import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
-import User from "../entities/user.entity";
 import createUserService from "../services/users/createUser.service";
 import deleteUserService from "../services/users/deleteUser.service";
 import listUsersService from "../services/users/listUsers.service";

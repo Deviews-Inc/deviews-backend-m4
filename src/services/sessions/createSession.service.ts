@@ -16,6 +16,11 @@ const createSessionService = async ({
   if (!userExists) {
     throw new AppError("Invalid email or password", 403);
   }
+
+  if (!userExists.isActive) {
+    throw new AppError("This user is not active", 401);
+  }
+
   const correctPassword = compareSync(password, userExists.password);
   if (!correctPassword) {
     throw new AppError("Invalid email or password", 403);

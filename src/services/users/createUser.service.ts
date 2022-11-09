@@ -26,16 +26,17 @@ const createUserService = async ({
   if (usernameAlreadyExists) {
     throw new AppError("Username already exists", 409);
   }
+  await Promise.all(
+    techs.map(async (tech) => {
+      const techVerifyExists = await techRepository.findOneBy({
+        id: tech,
+      });
 
-  techs.forEach(async (tech) => {
-    const techVerifyExists = await techRepository.findOneBy({
-      id: tech,
-    });
-
-    if (!techVerifyExists) {
-      throw new AppError("Tech not found", 404);
-    }
-  });
+      if (!techVerifyExists) {
+        throw new AppError("Tech not found", 404);
+      }
+    })
+  );
 
   const user = userRepository.create({
     name,

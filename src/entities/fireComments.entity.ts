@@ -10,7 +10,9 @@ class FireComments {
   @ManyToOne(() => User, (user) => user.fire_comments)
   user: User;
 
-  @ManyToOne(() => Comments, (comments) => comments.fires)
+  @ManyToOne(() => Comments, (comments) => comments.fires, {
+    onDelete: "CASCADE",
+  })
   comments: Comments;
 }
 

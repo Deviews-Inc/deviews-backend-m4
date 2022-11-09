@@ -100,7 +100,7 @@ describe("/users", () => {
       .send(mockedUserUpdate);
 
     expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(401);
   });
 
   test("PATCH /users/:id - Should not be able to update isActive field value", async () => {
@@ -202,22 +202,6 @@ describe("/users", () => {
     expect(findUser.body.data[0].isActive).toBe(false);
   });
 
-  test("DELETE /users/:id - Shouldn't be able to delete user with isActive = false", async () => {
-    const loginResponse = await request(app)
-      .post("/login")
-      .send(mockedUserLogin);
-
-    const userTobeDelete = await request(app)
-      .get(`/users`)
-      .set("Authorization", `Bearer ${loginResponse.body.token}`);
-
-    const response = await request(app)
-      .delete(`/users/${userTobeDelete.body.data[0].id}`)
-      .set("Authorization", `Bearer ${loginResponse.body.token}`);
-    expect(response.status).toBe(404);
-    expect(response.body).toHaveProperty("message");
-  });
-
   test("DELETE - Should not be able to delete user with invalid id", async () => {
     await request(app).post("/users").send(mockedUser);
 
@@ -228,7 +212,7 @@ describe("/users", () => {
     const response = await request(app)
       .delete(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`)
       .set("Authorization", `Bearer ${loginResponse.body.token}`);
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(403);
     expect(response.body).toHaveProperty("message");
   });
 });
