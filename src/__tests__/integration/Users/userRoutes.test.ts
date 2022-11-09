@@ -235,7 +235,7 @@ describe("/users", () => {
     const response = await request(app)
       .delete(`/users/${newUser.body.data[0].id}`)
       .set("Authorization", `Bearer ${loginResponse.body.token}`);
-    expect(response.status).toBe(401);
+    expect(response.status).toBe(403);
     expect(response.body).toHaveProperty("message");
   });
 });
