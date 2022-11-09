@@ -24,12 +24,12 @@ const updatePostService = async ({
     },
   });
 
-  if (findPost[0].user.id != id_user) {
-    throw new AppError("You're not the owner of this post", 401);
+  if (!findPost[0]) {
+    throw new AppError("Post not found", 404);
   }
 
-  if (!findPost) {
-    throw new AppError("Post not found", 404);
+  if (findPost[0].user.id != id_user) {
+    throw new AppError("You're not the owner of this post", 401);
   }
 
   if (comments || createdAt || firePosts || user) {

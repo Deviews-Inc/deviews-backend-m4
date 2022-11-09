@@ -8,3 +8,4 @@ export interface IPostUpdate extends IPostRequest {
   comments: string[];
   createdAt: Date;
 }
+
